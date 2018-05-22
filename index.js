@@ -67,10 +67,10 @@
 
 	function showComments(commentList){
 		var mainUL = document.createElement("ul");
-		console.log("commentList", commentList)
+		
 		for(var i = 0; i < commentList.length; i++){
 			var comment = new CurrentComment(commentList[i].userName,commentList[i].text,commentList[i].votes,commentList[i].commentList,commentList[i].commentTime)	
-			console.log('showComment - comment', comment);
+			
 			var li = addCommentBox(comment,i)
 			mainUL.appendChild(li)
 			if(commentList[i].commentList.length > 0){
@@ -81,17 +81,14 @@
 	}
 
 	function addCommentBox(comment,index){
-		// main li element
 		var li = document.createElement("li");
 		li.setAttribute("style", "list-style-type: none");
 
 		var completeComment  = document.createElement("div");
 		completeComment.setAttribute("style", "border-top: 1px solid black; padding-top: 1.2vh")
 
-		// main div for the li element
 		var mainDiv = document.createElement("div");
 
-		//commentDiv which will have comment and username
 		var commentDetailDiv = document.createElement("div");
 		commentDetailDiv.setAttribute("style", "border-bottom: 1px solid black");
 
@@ -124,7 +121,6 @@
 		commentNameDiv.appendChild(commentName)
 		commentTextDiv.appendChild(commentText)
 
-		// votes div which will have votes along with upvote and downvote
 		var likesDiv  = document.createElement("div");
 		likesDiv.setAttribute("style", "margin-top: 0.5vh");
 
@@ -165,8 +161,11 @@
 			replyBtn.style.cssText = 'display:none';
 			hiddenReplyDiv.style.cssText = 'display:block';
 		}
-		
-		timeDiv.appendChild(commentTime);
+
+		var time = commentTime.data;
+		var timeStr = new Date(time).toLocaleString();
+
+		timeDiv.innerHTML = "Posted at: " + timeStr.toString();
 		
 		otherOpDiv.appendChild(likes);
 		otherOpDiv.appendChild(likePic);
@@ -176,16 +175,12 @@
 		likesDiv.appendChild(timeDiv);
 		likesDiv.appendChild(otherOpDiv);
 
-		//reply username div
 		var userNameDiv = document.createElement("div")
-		// var userName = document.createTextNode("Username:")
 		var usernameInput = document.createElement("input");
 		usernameInput.setAttribute("style", "width: 96%; height: 2.5vh; padding: 3px;"	)
 		usernameInput.setAttribute("placeholder", "Enter your username")
-		// userNameDiv.appendChild(userName)
 		userNameDiv.appendChild(usernameInput)
 
-		// reply comment div
 		var replyCommentLabelDiv = document.createElement("div");
 		var commentText = document.createTextNode("Comment:");
 		replyCommentLabelDiv.appendChild(commentText);
@@ -210,17 +205,8 @@
 			comment.updateReplyList();
 		}
 
-		// reply Div which will show up on click of reply button
 		var replyDiv = document.createElement("div");
 		replyDiv.setAttribute("style", "padding: 2vh;")
-
-		var backBtn = document.createElement("button")
-		backBtn.innerHTML = "back";
-		backBtn.onClick = function(){
-			console.log("back clicked");
-			// hiddenReplyDiv.style.cssText = 'display:none';
-
-		} 
 		
 		var hiddenReplyDiv = document.createElement("div")
 		hiddenReplyDiv.style.cssText = 'display:none';
@@ -228,15 +214,10 @@
 		hiddenReplyDiv.appendChild(replyCommentLabelDiv)
 		hiddenReplyDiv.appendChild(replyCommentDiv)
 		hiddenReplyDiv.appendChild(postReplyBtn)
-		hiddenReplyDiv.appendChild(backBtn)
-
 
 
 		replyDiv.appendChild(hiddenReplyDiv);
 
-		
-		// mainDiv.appendChild(commentNameDiv)
-		// mainDiv.appendChild(commentTextDiv)
 		mainDiv.appendChild(commentDetailDiv)
 		mainDiv.appendChild(likesDiv)
 		mainDiv.appendChild(replyDiv)
@@ -248,9 +229,9 @@
 	document.getElementById('post').addEventListener('click',function(){
 		var userName = document.getElementById('userName').value;
 		var content = document.getElementById('joinDiscussion').value;
-		var currentTime = Date.now();
+		var commentTime = Date();
 
-		createComment(userName,content,0,currentTime);
+		createComment(userName,content,0,commentTime);
 	})
 
 	var commentList = JSON.parse(window.localStorage.getItem('commentList'))||[];
