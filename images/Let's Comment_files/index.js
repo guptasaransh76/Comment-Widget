@@ -43,7 +43,7 @@
 	function findAndUpdateComment(commentList,comment){
 		for(var i = 0; i < commentList.length; i++){
 			if(commentList[i].text == comment.text && commentList[i].userName == comment.userName)
-				commentList[i] = comment;
+				commentList[i] = comment
 			if(commentList[i].commentList.length > 0)
 				findAndUpdateComment(commentList[i].commentList,comment)
 		}
@@ -83,37 +83,32 @@
 	function addCommentBox(comment,index){
 		// main li element
 		var li = document.createElement("li");
-		li.setAttribute("style", "list-style-type: none");
-
-		var completeComment  = document.createElement("div");
-		completeComment.setAttribute("style", "border-top: 1px solid black; padding-top: 1.2vh")
+		li.setAttribute("style", "list-style-type: none")
 
 		// main div for the li element
 		var mainDiv = document.createElement("div");
 
 		//commentDiv which will have comment and username
 		var commentDetailDiv = document.createElement("div");
-		commentDetailDiv.setAttribute("style", "border-bottom: 1px solid black");
-
+		commentDetailDiv.setAttribute("style", "background: #777")
 		var commentNameDiv = document.createElement("div");
 		
 		var commentPicDiv = document.createElement("div");
-		commentPicDiv.setAttribute("style", "float: left; height: auto");
-
+		commentPicDiv.setAttribute("style", "height: 100%; width: 20%")
 		var commentPic = document.createElement("img");
 		var imagelocpro = "images/avatar1.png";
 		commentPic.setAttribute("src", imagelocpro);
-		commentPic.setAttribute("height", "45vh");
-		commentPic.setAttribute("width", "45vw");
+		commentPic.setAttribute("height", "50px");
+		commentPic.setAttribute("width", "50px");
 		commentPic.setAttribute("style", "margin-right: 10px; border-radius: 5px");
 
 		var commentName = document.createTextNode(comment.userName);
 		
-		commentNameDiv.setAttribute("style", "font-weight: bold; font-size: 18px; font-family: Times; padding: 0.6vh");
+		commentNameDiv.setAttribute("style", "font-weight: normal; font-size: 20px; font-family: Times; margin-top: -13.5vh; margin-left: 5vw");
 
 		var commentTextDiv = document.createElement("div");
 		var commentText = document.createTextNode(comment.text);
-		commentTextDiv.setAttribute("style", "font-weight: normal; font-family: verdana; font-size: 15px;")
+		commentTextDiv.setAttribute("style", "font-weight: normal; font-family: verdana;  margin-left: 5vw")
 
 		commentDetailDiv.appendChild(commentPicDiv);
 		commentDetailDiv.appendChild(commentNameDiv);
@@ -126,13 +121,12 @@
 
 		// votes div which will have votes along with upvote and downvote
 		var likesDiv  = document.createElement("div");
-		likesDiv.setAttribute("style", "margin-top: 0.5vh");
+		likesDiv.setAttribute("style", "background: #333");
 
 		var timeDiv  = document.createElement("div");
-		timeDiv.setAttribute("style", "float: right;");
-		
+
 		var otherOpDiv  = document.createElement("div");
-		otherOpDiv.setAttribute("style", "margin-top: 1vh")
+		otherOpDiv.setAttribute("style", "float: right; marign-bottom: -5vh");
 
 		var likes = document.createTextNode(comment.votes);
 	
@@ -178,11 +172,10 @@
 
 		//reply username div
 		var userNameDiv = document.createElement("div")
-		// var userName = document.createTextNode("Username:")
+		var userName = document.createTextNode("Username:")
 		var usernameInput = document.createElement("input");
-		usernameInput.setAttribute("style", "width: 96%; height: 2.5vh; padding: 3px;"	)
-		usernameInput.setAttribute("placeholder", "Enter your username")
-		// userNameDiv.appendChild(userName)
+		usernameInput.setAttribute("style", "width: 96%; height: 2.5vh; padding: 3px;")
+		userNameDiv.appendChild(userName)
 		userNameDiv.appendChild(usernameInput)
 
 		// reply comment div
@@ -197,10 +190,11 @@
 		
 		replyCommentDiv.appendChild(commentInput);
 
+		//reply post button which will create a new comment
 		
 		var postReplyBtn = document.createElement("button")
 		postReplyBtn.innerHTML = "POST"
-		postReplyBtn.setAttribute("style", "width: 6vw; height: 4vh; background: #24343d; color: white; border-radius: 1.5vh; float: right; margin-right: 1.2vw; text-decoration: none; border: none; margin-top: 0.7vh;")
+		postReplyBtn.setAttribute("style", "width: 6.5vw; height: 6vh; background: #24343d; color: white; border-radius: 1.5vh; float: right; margin-right: 1.2vw; text-decoration: none; border: none")
 		postReplyBtn.onclick = function(){
 			var content = commentInput.value;
 			var user = usernameInput.value;
@@ -213,14 +207,6 @@
 		// reply Div which will show up on click of reply button
 		var replyDiv = document.createElement("div");
 		replyDiv.setAttribute("style", "padding: 2vh;")
-
-		var backBtn = document.createElement("button")
-		backBtn.innerHTML = "back";
-		backBtn.onClick = function(){
-			console.log("back clicked");
-			// hiddenReplyDiv.style.cssText = 'display:none';
-
-		} 
 		
 		var hiddenReplyDiv = document.createElement("div")
 		hiddenReplyDiv.style.cssText = 'display:none';
@@ -228,7 +214,6 @@
 		hiddenReplyDiv.appendChild(replyCommentLabelDiv)
 		hiddenReplyDiv.appendChild(replyCommentDiv)
 		hiddenReplyDiv.appendChild(postReplyBtn)
-		hiddenReplyDiv.appendChild(backBtn)
 
 
 
@@ -240,17 +225,15 @@
 		mainDiv.appendChild(commentDetailDiv)
 		mainDiv.appendChild(likesDiv)
 		mainDiv.appendChild(replyDiv)
-		completeComment.appendChild(mainDiv)
-		li.appendChild(completeComment)
+		li.appendChild(mainDiv)
 		return li;
 	}
 
 	document.getElementById('post').addEventListener('click',function(){
 		var userName = document.getElementById('userName').value;
 		var content = document.getElementById('joinDiscussion').value;
-		var currentTime = Date.now();
 
-		createComment(userName,content,0,currentTime);
+		createComment(userName,content,0)
 	})
 
 	var commentList = JSON.parse(window.localStorage.getItem('commentList'))||[];
