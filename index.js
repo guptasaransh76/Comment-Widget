@@ -66,18 +66,18 @@
 	}
 
 	function showComments(commentList){
-		var mainUL = document.createElement("ul");
+		var mainList = document.createElement("ul");
 		
 		for(var i = 0; i < commentList.length; i++){
 			var comment = new CurrentComment(commentList[i].userName,commentList[i].text,commentList[i].votes,commentList[i].commentList,commentList[i].commentTime)	
 			
-			var li = addCommentBox(comment,i)
-			mainUL.appendChild(li)
+			var listItem = addCommentBox(comment,i)
+			mainList.appendChild(listItem)
 			if(commentList[i].commentList.length > 0){
-				mainUL.appendChild(showComments(commentList[i].commentList))
+				mainList.appendChild(showComments(commentList[i].commentList))
 			}
 		}
-		return mainUL
+		return mainList;
 	}
 
 	function addCommentBox(comment,index){
