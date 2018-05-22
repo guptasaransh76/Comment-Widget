@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Let's Comment</title>
+	</head>
+	<body>
+		<div style="width: 50%; margin: auto; background: #f4fbff; padding: 10px; border-radius: 3vh; ">
+			<form onsubmit="event.preventDefault();">
+				
+				<div id="postComment">
+					<label style="font-size: 15px;">Username:</label>
+					<input type="input" id="userName" placeholder="Enter the Username" style="width: 96%; height: 2.5vh; padding: 3px" />
+				</div>
+
+				<div style="font-size: 15px; margin-top: 1vh;">
+					<label>Comment:</label>
+				</div>
+
+				<textarea name="joinDiscussion" id="joinDiscussion" cols=78 placeholder="What's on your mind?" style="height: 12vh; padding: 3px;"></textarea>
+				
+				<div>
+					<input type="button" value="Post" id="post" style="width: 6.5vw; height: 6vh; background: #24343d; color: white; border-radius: 1.5vh; float: right; margin-right: 1.2vw; text-decoration: none; border: none" />
+				</div>
+
+				<section id="viewComments" style="margin-top: 10vh">
+					
+				</section>
+
+			</form>
+		<div>
+			<!-- <input type="button" value="Clear All" id="clear" /> -->
+	</body>
+		<script src="index.js" type="text/javascript" charset="utf-8"></script>
+</html>
