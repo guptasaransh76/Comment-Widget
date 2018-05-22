@@ -177,7 +177,7 @@
 
 		var userNameDiv = document.createElement("div")
 		var usernameInput = document.createElement("input");
-		usernameInput.setAttribute("style", "width: 96%; height: 2.5vh; padding: 3px;"	)
+		usernameInput.setAttribute("style", "width: 96%; height: 2.5vh; padding: 3px;")
 		usernameInput.setAttribute("placeholder", "Enter your username")
 		userNameDiv.appendChild(usernameInput)
 
@@ -188,7 +188,7 @@
 
 		var replyCommentDiv = document.createElement("div");
 		var commentInput = document.createElement("textarea");
-		commentInput.setAttribute("style", "height: 12vh; padding: 3px; width: 95%;");
+		commentInput.setAttribute("style", "height: 12vh; padding: 3px; width: 96%;");
 		
 		replyCommentDiv.appendChild(commentInput);
 
