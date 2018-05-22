@@ -11,7 +11,7 @@
 	CurrentComment.prototype.like = function(){
 		var commentList = JSON.parse(window.localStorage.getItem('commentList'))||[];
 		this.votes = this.votes + 1;
-		commentList = findAndUpdateComment(commentList,this)
+		commentList = searchAndCommentUpdate(commentList,this)
 		createCommentView(commentList);
 	}
 
@@ -19,7 +19,7 @@
 		var commentList = JSON.parse(window.localStorage.getItem('commentList'))||[];
 		if(this.votes > 0)
 			this.votes = this.votes - 1;
-		commentList = findAndUpdateComment(commentList,this)
+		commentList = searchAndCommentUpdate(commentList,this)
 		createCommentView(commentList);
 	}
 
@@ -34,18 +34,18 @@
 		createCommentView(commentList);
 	}
 
-	CurrentComment.prototype.updateReplyList = function(){
+	CurrentComment.prototype.replyListUpdate = function(){
 		var commentList = JSON.parse(window.localStorage.getItem('commentList'))||[];
-		commentList = findAndUpdateComment(commentList,this)
+		commentList = searchAndCommentUpdate(commentList,this)
 		createCommentView(commentList)
 	}
 
-	function findAndUpdateComment(commentList,comment){
+	function searchAndCommentUpdate(commentList,comment){
 		for(var i = 0; i < commentList.length; i++){
 			if(commentList[i].text == comment.text && commentList[i].userName == comment.userName)
 				commentList[i] = comment;
 			if(commentList[i].commentList.length > 0)
-				findAndUpdateComment(commentList[i].commentList,comment)
+				searchAndCommentUpdate(commentList[i].commentList,comment)
 		}
 		return commentList;
 	}
@@ -85,7 +85,7 @@
 		li.setAttribute("style", "list-style-type: none");
 
 		var completeComment  = document.createElement("div");
-		completeComment.setAttribute("style", "border-top: 1px solid black; padding-top: 1.2vh")
+		completeComment.setAttribute("style", "border-top: 1px solid black; padding-top: 1.2vh; margin-top: 5vh")
 
 		var mainDiv = document.createElement("div");
 
@@ -202,7 +202,7 @@
 			var commentTime = new Date();
 			var reply = new CurrentComment(user,content,0,[],commentTime);
 			comment.commentList.push(reply);
-			comment.updateReplyList();
+			comment.replyListUpdate();
 		}
 
 		var replyDiv = document.createElement("div");
