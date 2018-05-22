@@ -1,4 +1,4 @@
-# Comment-Widget
+# Commenting_Widget
 This is a Comment Widget, which is completely built in Javascript.
 
 To start, Clone the repository by using:
