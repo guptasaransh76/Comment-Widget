@@ -165,7 +165,7 @@
 		var time = commentTime.data;
 		var timeStr = new Date(time).toLocaleString();
 
-		timeDiv.innerHTML = "Posted at: " + timeStr.toString();
+		timeDiv.innerHTML = "Posted on: " + timeStr.toString();
 		
 		otherOpDiv.appendChild(likes);
 		otherOpDiv.appendChild(likePic);
